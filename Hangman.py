@@ -92,5 +92,4 @@ class HangmanGame(object):
         if not state:
             self.info('YOU RAN OUT OF GUESSES AND LOST!')
 
-
 a = HangmanGame().start()
