@@ -7,6 +7,7 @@ import string
 
 class HangmanGame(object):
 
+#this builds the hangman noose and stand
     hang = []
     hang.append(' +---+')
     hang.append(' |   |')
@@ -17,6 +18,7 @@ class HangmanGame(object):
     hang.append('     |')
     hang.append('=======')
 
+#this builds via increment array the man
     man = {}
     man[0] = [' 0   |']
     man[1] = [' 0   |']
@@ -28,12 +30,15 @@ class HangmanGame(object):
 
     pics = []
 
+    #opens the given class text file with all the word options
     f = open("hangmanwords.txt")
     text = f.read()
     words = text.split()
 
-    infStr = '-----------------------------------------------------'
+    #break line at the end of the game
+    breakStr = '-----------------------------------------------------'
 
+    #initialize
     def __init__(self, *args, **kwargs):
         i, j = 2, 0
         self.pics.append(self.hang[:])
@@ -44,13 +49,16 @@ class HangmanGame(object):
                 j += 1
             self.pics.append(pic)
 
+    #pick the word to use from text file
     def pickWord(self):
         return self.words[random.randint(0, len(self.words) - 1)]
 
+    #prints the next line to display visual hangman progress & state
     def printPic(self, idx, wordLen):
         for line in self.pics[idx]:
             print(line)
 
+    #error check user input
     def askAndEvaluate(self, word, result, missed):
         guess = input()
         if guess == None or len(guess) != 1 or (guess in result) or (guess in missed):
@@ -63,12 +71,14 @@ class HangmanGame(object):
             i += 1
         return guess, right
 
+    #break string at the end for separation
     def info(self, info):
-        ln = len(self.infStr)
-        print(self.infStr[:-3])
+        ln = len(self.breakStr)
+        print(self.breakStr[:-3])
         print(info)
-        print(self.infStr[3:])
+        print(self.breakStr[3:])
 
+    #program Hangman start
     def start(self):
         print('Welcome to CST 438 - Hangman!')
         word = list(self.pickWord())
