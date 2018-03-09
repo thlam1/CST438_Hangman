@@ -2,6 +2,7 @@
 #Hangman game
 
 import random
+import string
 
 
 class HangmanGame(object):
@@ -27,9 +28,11 @@ class HangmanGame(object):
 
     pics = []
 
-    words = '''computer'''.split()
+    f = open("hangmanwords.txt")
+    text = f.read()
+    words = text.split()
 
-    infStr = '---------------------------------------------------------------'
+    infStr = '-----------------------------------------------------'
 
     def __init__(self, *args, **kwargs):
         i, j = 2, 0
@@ -76,7 +79,7 @@ class HangmanGame(object):
             print('Guess the word: ', end='')
             guess, right = self.askAndEvaluate(word, result, missed)
             if guess == None:
-                print('You\'ve already tried this letter.')
+                print('Invalid input. Try again!')
                 continue
             print(''.join(result))
             if result == word:
@@ -91,5 +94,7 @@ class HangmanGame(object):
 
         if not state:
             self.info('YOU RAN OUT OF GUESSES AND LOST!')
+
+
 
 a = HangmanGame().start()
